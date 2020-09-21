@@ -78,9 +78,9 @@ public class Tank {
                 tFrame.arrayBadTanks.remove(this);
             }
             else {
-                //主坦克死了后
+                //主坦克死了后,退出游戏
                 tFrame.setVisible(false);
-                new GameOverFrame();
+                System.exit(0);
             }
         }
 

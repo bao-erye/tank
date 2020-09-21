@@ -1,18 +1,14 @@
 package com.baoerye.tank;
 
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
-        //TankFrame tf=new TankFrame();
-        GameOverFrame gameOverFrame=new GameOverFrame();
+        TankFrame tf=new TankFrame();
         while(true){
             Thread.sleep(25);
-            //tf.repaint();
-            gameOverFrame.repaint();
+            tf.repaint();
         }
 
     }
