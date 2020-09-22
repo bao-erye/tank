@@ -76,6 +76,12 @@ public class Bullet {
             this.die();
             tank.die();
             tf.arrayExplodes.add(new Explode(x,y,tf));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new Audio("audio/explode.wav").play();
+                }
+            }).start();
         }
 
     }

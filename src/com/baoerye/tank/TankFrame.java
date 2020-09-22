@@ -35,6 +35,13 @@ public class TankFrame extends Frame {
         initBadTanks();
         //添加墙
         initWalls();
+        //添加背景音乐
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new Audio("audio/war1.wav").loop();
+            }
+        }).start();
     }
     Image offScreenImage = null;
 

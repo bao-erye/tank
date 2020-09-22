@@ -101,6 +101,7 @@ public class Tank {
                 break;
         }
 
+
     }
     //坦克边界碰撞检测
     private void collideDetect() {
@@ -127,7 +128,14 @@ public class Tank {
     public void fire() {
         Bullet bullet=new Bullet(x+TANK_WIDTH/2,y+TANK_HEIGHT/2,direction,group,tFrame);
         tFrame.arrayBullets.add(bullet);
-        //if(this.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        if(this.group == Group.GOOD){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new Audio("audio/tank_fire.wav").play();
+                }
+            }).start();
+        }
 
     }
     public void die() {
