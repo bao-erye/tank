@@ -10,8 +10,8 @@ public class Bullet {
     public Rectangle rect=new Rectangle();
     private boolean isLiving=true;
     private Group group;
-    private static final int BULLET_WIDTH=ResourceMgr.bulletD.getWidth();
-    private static final int BULLET_HEIGHT=ResourceMgr.bulletD.getHeight();
+    public static final int BULLET_WIDTH=ResourceMgr.bulletD.getWidth();
+    public static final int BULLET_HEIGHT=ResourceMgr.bulletD.getHeight();
     private static final int BULLET_SPEED=5;
 
     public Bullet(int px,int py,Direction dir,Group gp,TankFrame tankFrame){
@@ -24,6 +24,7 @@ public class Bullet {
         rect.y=y;
         rect.width=BULLET_WIDTH;
         rect.height=BULLET_HEIGHT;
+        tankFrame.arrayBullets.add(this);
     }
 
 

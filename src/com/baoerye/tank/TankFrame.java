@@ -142,7 +142,10 @@ public class TankFrame extends Frame {
                     setTankDir();
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    myTank.fire(new DefaultFireStrategy());
+                    break;
+                case KeyEvent.VK_SHIFT:
+                    myTank.fire(new FourDirFireStrategy());
                     break;
             }
         }

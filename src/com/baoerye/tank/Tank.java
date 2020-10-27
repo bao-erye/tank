@@ -6,20 +6,20 @@ import java.awt.*;
 import java.util.Random;
 
 public class Tank {
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     private int oldX;
     private int oldY;
-    private TankFrame tFrame;
+    public TankFrame tFrame;
     private boolean ismoving=false;
     private boolean isLiving=true;
-    private Direction direction=Direction.UP;
+    public Direction direction=Direction.UP;
     private Direction oldDirection;
-    private Group group;
+    public Group group;
     public Rectangle rect=new Rectangle();
     private Random random=new Random();
-    private static final int TANK_WIDTH=ResourceMgr.goodTankU.getWidth();
-    private static final int TANK_HEIGHT=ResourceMgr.goodTankU.getHeight();
+    public static final int TANK_WIDTH=ResourceMgr.goodTankU.getWidth();
+    public static final int TANK_HEIGHT=ResourceMgr.goodTankU.getHeight();
     private static final int TANK_SPEED=3;
     public Tank(int px,int py,Group gp,TankFrame tf){
         this.x=px;
@@ -68,7 +68,7 @@ public class Tank {
             direction=Direction.values()[random.nextInt(4)];
         }
         if (group==Group.BAD&&random.nextInt(100)>95){
-            fire();
+            fire(new DefaultFireStrategy());
         }
 
         if(!ismoving) return;
@@ -125,17 +125,8 @@ public class Tank {
         }
     }
     //发射子弹
-    public void fire() {
-        Bullet bullet=new Bullet(x+TANK_WIDTH/2,y+TANK_HEIGHT/2,direction,group,tFrame);
-        tFrame.arrayBullets.add(bullet);
-        if(this.group == Group.GOOD){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    new Audio("audio/tank_fire.wav").play();
-                }
-            }).start();
-        }
+    public void fire(FireStrategy fs) {
+        fs.fire(this);
 
     }
     public void die() {
