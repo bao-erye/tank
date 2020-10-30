@@ -16,8 +16,8 @@ public abstract class Tank {
     public Direction direction=Direction.UP;
     public Direction oldDirection;
     public Group group;
-    public static int TANK_WIDTH = ResourceMgr.goodTankD.getWidth();;
-    public static int TANK_HEIGHT = ResourceMgr.goodTankD.getHeight();
+    public static int TANK_WIDTH = ResourceMgr.getResoureMgrInstance().goodTankD.getWidth();;
+    public static int TANK_HEIGHT = ResourceMgr.getResoureMgrInstance().goodTankD.getHeight();
     public static final int TANK_SPEED=3;
     public Rectangle rect=new Rectangle();
     private Random random=new Random();

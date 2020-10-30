@@ -5,13 +5,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ResourceMgr {
-    public static BufferedImage goodTankL,goodTankR,goodTankU,goodTankD;
-    public static BufferedImage badTankL,badTankR,badTankU,badTankD;
-    public static BufferedImage badBulletL,badBulletR,badBulletU,badBulletD;
-    public static BufferedImage goodBulletL,goodBulletR,goodBulletU,goodBulletD;
-    public static BufferedImage[] explodes=new BufferedImage[11];
-    public static BufferedImage wall;
-    static {
+    private static  ResourceMgr resourceMgr =null;
+    public  BufferedImage goodTankL,goodTankR,goodTankU,goodTankD;
+    public  BufferedImage badTankL,badTankR,badTankU,badTankD;
+    public  BufferedImage badBulletL,badBulletR,badBulletU,badBulletD;
+    public  BufferedImage goodBulletL,goodBulletR,goodBulletU,goodBulletD;
+    public  BufferedImage[] explodes=new BufferedImage[11];
+    public  BufferedImage wall;
+    private ResourceMgr(){
         try {
             goodTankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/goodTankL.png"));
             goodTankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/goodTankR.png"));
@@ -36,18 +37,15 @@ public class ResourceMgr {
             for (int i=0;i<11;i++){
                 explodes[i]=ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/"+i+".gif"));
             }
-
             wall=ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/square2.jpg"));
-
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
+    }
+    public static ResourceMgr getResoureMgrInstance(){
+        if (resourceMgr == null){
+            resourceMgr = new ResourceMgr();
+        }
+        return resourceMgr;
     }
 }

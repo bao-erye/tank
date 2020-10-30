@@ -18,7 +18,7 @@ public class Explode {
     }
 
     public void paint(Graphics g) throws IOException {
-        g.drawImage(ResourceMgr.explodes[step++],x,y,null);
+        g.drawImage(ResourceMgr.getResoureMgrInstance().explodes[step++],x,y,null);
         if (step>9) tFrame.arrayExplodes.remove(this);
 
     }

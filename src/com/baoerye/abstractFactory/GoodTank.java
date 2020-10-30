@@ -21,16 +21,16 @@ public class GoodTank extends Tank{
 
         switch (direction){
             case UP:
-                g.drawImage(ResourceMgr.goodTankU,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().goodTankU,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.goodTankD,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().goodTankD,x,y,null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.goodTankL,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().goodTankL,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.goodTankR,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().goodTankR,x,y,null);
                 break;
         }
     }

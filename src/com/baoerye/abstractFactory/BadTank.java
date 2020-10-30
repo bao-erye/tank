@@ -21,16 +21,16 @@ public class BadTank extends Tank {
 
         switch (direction){
             case UP:
-                g.drawImage(ResourceMgr.badTankU,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().badTankU,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.badTankD,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().badTankD,x,y,null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.badTankL,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().badTankL,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.badTankR,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().badTankR,x,y,null);
                 break;
         }
     }

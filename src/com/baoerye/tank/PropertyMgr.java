@@ -6,16 +6,22 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertyMgr {
-    static Properties props=new Properties();
-    static {
+    private static final PropertyMgr propertyMgr =new PropertyMgr();
+    private Properties props=new Properties();
+    private PropertyMgr(){
+
         try {
             props.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+    public static PropertyMgr getPropertyMgrInstance(){
+        return propertyMgr;
     }
 
-    public static Object get(String key){
+    public Object get(String key){
         if (props!=null){
             return props.get(key);
         }

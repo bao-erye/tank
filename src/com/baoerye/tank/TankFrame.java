@@ -192,7 +192,7 @@ public class TankFrame extends Frame {
         }
     }
     private void initBadTanks() {
-        int initBadTank=Integer.valueOf((String)PropertyMgr.get("badTankCount"));
+        int initBadTank=Integer.valueOf((String)PropertyMgr.getPropertyMgrInstance().get("badTankCount"));
         for (int i=0;i<initBadTank;i++){
             Tank badTank=tankFactory.getTank("badTank",150,150,this,i);
             arrayBadTanks.add(badTank);

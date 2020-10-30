@@ -8,8 +8,8 @@ public class Wall {
     private int y;
     private TankFrame tFrame;
     public Rectangle rect=new Rectangle();
-    private static final int WALL_WIDTH=ResourceMgr.wall.getWidth();
-    private static final int WALL_HEIGHT=ResourceMgr.wall.getHeight();
+    private static final int WALL_WIDTH=ResourceMgr.getResoureMgrInstance().wall.getWidth();
+    private static final int WALL_HEIGHT=ResourceMgr.getResoureMgrInstance().wall.getHeight();
     public Wall(int px,int py,TankFrame tf){
         this.x=px;
         this.y=py;
@@ -21,7 +21,7 @@ public class Wall {
     }
 
     public void paint(Graphics g){
-        g.drawImage(ResourceMgr.wall,x,y,null);
+        g.drawImage(ResourceMgr.getResoureMgrInstance().wall,x,y,null);
 
     }
 

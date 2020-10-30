@@ -9,8 +9,8 @@ public class BadBullet extends Bullet {
     public BadBullet(int px,int py,Direction dir,Group gp,TankFrame tankFrame){
 
         super(px,py,dir,gp,tankFrame);
-        BULLET_HEIGHT = ResourceMgr.badBulletD.getHeight();
-        BULLET_WIDTH = ResourceMgr.badBulletD.getWidth();
+        BULLET_HEIGHT = ResourceMgr.getResoureMgrInstance().badBulletD.getHeight();
+        BULLET_WIDTH = ResourceMgr.getResoureMgrInstance().badBulletD.getWidth();
     }
 
     public void paint(Graphics g){
@@ -20,16 +20,16 @@ public class BadBullet extends Bullet {
 
         switch (direction){
             case UP:
-                g.drawImage(ResourceMgr.badBulletU,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().badBulletU,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.badBulletD,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().badBulletD,x,y,null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.badBulletL,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().badBulletL,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.badBulletR,x,y,null);
+                g.drawImage(ResourceMgr.getResoureMgrInstance().badBulletR,x,y,null);
                 break;
         }
         collideWithBridge();//子弹与边界碰撞检测
