@@ -1,26 +1,27 @@
 package com.baoerye.tank;
 
+import com.baoerye.abstractFactory.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Random;
 
 public class TankFrame extends Frame {
 
     private static final int GAME_WIDTH=800,GAME_HEIGHT=800;
-    Tank myTank=new Tank(400,600,Group.GOOD,this);
-    ArrayList<Bullet> arrayBullets=new ArrayList<Bullet>();
-    ArrayList<Tank> arrayBadTanks=new ArrayList<Tank>();
-    ArrayList<Explode> arrayExplodes=new ArrayList<Explode>();
-    ArrayList<Wall> arrayWalls=new ArrayList<Wall>();
+    // 获取坦克工厂
+    AbstratFactory tankFactory = FactoryProducer.getFactory("tank");
+    Tank myTank = tankFactory.getTank("goodTank",400,700,this,1);
+    public ArrayList<Bullet> arrayBullets=new ArrayList<Bullet>();
+    public ArrayList<Tank> arrayBadTanks=new ArrayList<Tank>();
+    public ArrayList<Explode> arrayExplodes=new ArrayList<Explode>();
+    public ArrayList<Wall> arrayWalls=new ArrayList<Wall>();
 
     public TankFrame(){
         setSize(GAME_WIDTH,GAME_HEIGHT);
         setVisible(true);
         setTitle("坦克大战");
-
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -30,8 +31,7 @@ public class TankFrame extends Frame {
 
         //添加监听
         addKeyListener(new MyListener());
-
-        //添加敌机
+        //添加敌方坦克
         initBadTanks();
         //添加墙
         initWalls();
@@ -43,6 +43,7 @@ public class TankFrame extends Frame {
             }
         }).start();
     }
+
     Image offScreenImage = null;
 
     @Override
@@ -65,7 +66,8 @@ public class TankFrame extends Frame {
         g.drawString("子弹数量:"+arrayBullets.size(), 10, 60);
         g.drawString("敌方坦克数量:"+arrayBadTanks.size(), 10, 80);
         g.drawString("爆炸数量:"+arrayExplodes.size(), 10, 100);
-        //画坦克
+
+        //画我方坦克
         myTank.paint(g);
         //画墙
         for (int i=0;i<arrayWalls.size();i++){
@@ -79,17 +81,23 @@ public class TankFrame extends Frame {
         for (int i=0;i<arrayBadTanks.size();i++){
             arrayBadTanks.get(i).paint(g);
         }
+        //主坦克与墙碰撞检测
+        for (Wall wall:arrayWalls){
+            myTank.collideWithWall(wall);
+        }
         //每颗子弹与敌人、墙碰撞检测
         for (int i=0;i<arrayBullets.size();i++){
+            // 每颗子弹与墙碰撞检测
+            for (Wall wall:arrayWalls) {
+                arrayBullets.get(i).collideWithWall(wall);
+            }
+            // 每颗子弹与坦克碰撞检测
             if (arrayBullets.get(i).getGroup()==Group.GOOD){
                 for (Tank tank:arrayBadTanks) {
                     arrayBullets.get(i).collideWithTank(tank);
                 }
             }else {
                 arrayBullets.get(i).collideWithTank(myTank);
-            }
-            for (Wall wall:arrayWalls) {
-                arrayBullets.get(i).collideWithWall(wall);
             }
         }
         //每辆坦克和墙、其他坦克碰撞检测
@@ -101,10 +109,7 @@ public class TankFrame extends Frame {
                 arrayBadTanks.get(i).collideWithTank(arrayBadTanks.get(j));
             }
         }
-        //主坦克与墙碰撞检测
-        for (Wall wall:arrayWalls){
-            myTank.collideWithWall(wall);
-        }
+
         //画爆炸
         for (int i=0;i<arrayExplodes.size();i++){
             try {
@@ -189,7 +194,7 @@ public class TankFrame extends Frame {
     private void initBadTanks() {
         int initBadTank=Integer.valueOf((String)PropertyMgr.get("badTankCount"));
         for (int i=0;i<initBadTank;i++){
-            Tank badTank=new Tank(150+i*120,150,Group.BAD,this);
+            Tank badTank=tankFactory.getTank("badTank",150,150,this,i);
             arrayBadTanks.add(badTank);
         }
     }
